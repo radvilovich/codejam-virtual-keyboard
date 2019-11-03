@@ -1,0 +1,40 @@
+textarea {
+    display: block;
+    width: 50%;
+    height: 300px;
+    border: 1px solid grey;
+    margin: 20px auto;
+}
+
+table td {
+    border: 1px solid grey;
+}
+
+#keyboard {
+    display: block;
+    width: 750px;
+    height: 250px;
+    border: 1px solid grey;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.row {
+    height: 50px;
+}
+
+.button {
+    width: 40px;
+    height: 40px;
+    background-color: aquamarine;
+    margin: 5px;
+    border-radius: 15%;
+    text-align: center;
+    line-height: 40px;
+    float: left;
+    cursor: pointer;
+}
+
+.button.active, .button:hover {
+    background: cornflowerblue;
+}
