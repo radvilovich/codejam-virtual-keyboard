@@ -1,10 +1,12 @@
 class Button {
     buttonConfig;
     callback;
+    keyboard;
     buttonElement = document.createElement('div');
-    constructor(buttonConfig, callback) {
+    constructor(buttonConfig, callback, keyboard) {
         this.buttonConfig = buttonConfig;
         this.callback = callback;
+        this.keyboard = keyboard;
         this.setElementParams();        
         this.events();
     }
@@ -29,17 +31,40 @@ class Button {
             setTimeout(() => {
                 this.buttonElement.className = 'button';
             }, 200);
+
+            if (this.buttonConfig['key'] === 'CapsLock')  {
+                this.keyboard.isCapsPressed = !this.keyboard.isCapsPressed;
+                console.log(this.keyboard.isCapsPressed);
+                let key;
+                if(this.isCapsPressed) {
+                    key = 'RU';
+                } else {
+                    key = 'ru';
+                }
+            }
         });
 
         document.addEventListener('keydown', (event) => {
             if (event.code === this.buttonConfig['key'])  {
-                console.log(this.buttonElement);
                 this.buttonElement.className = 'button active';
 
                 setTimeout(() => {
                     this.buttonElement.className = 'button';
                 }, 200);
             }
+
+            setTimeout(() => {
+                if (event.code === 'CapsLock')  {
+                    let key;
+                    if(this.keyboard.isCapsPressed) {
+                        key = 'RU';
+                    } else {
+                        key = 'ru';
+                    }
+                    this.buttonElement.innerHTML = this.buttonConfig[key];
+                }
+            }, 0);
+            
         });
     }
 }
@@ -69,6 +94,8 @@ class Keyboard {
         'Backspace'
     ];
 
+    isCapsPressed = false;
+
     elementTextarea; // DOM-Element #textarea
     constructor(elementKeyboard, elementTextarea) {
         this.elementTextarea = elementTextarea;
@@ -81,11 +108,20 @@ class Keyboard {
             rowConfig.forEach((buttonConfig) => {
                 const newButtonConfig = this.changeButtonConfig(buttonConfig);
 
-                const button = new Button(newButtonConfig, this.changeInputValue);
+                const button = new Button(newButtonConfig, this.changeInputValue, this);
                 row.append(button.getButtonElement());
             })
         })
-        console.log(elementKeyboard);
+        this.events();
+    }
+
+    events() {
+        
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'CapsLock')  {
+                this.isCapsPressed = !this.isCapsPressed;
+            }
+        });
     }
 
     changeButtonConfig(buttonConfig) {
@@ -103,12 +139,17 @@ class Keyboard {
         }
 
         return newConfig;
-
     }
 
     changeInputValue = (buttonConfig) => {
         if (!buttonConfig.text) {
-            this.elementTextarea.value += buttonConfig['ru'];
+            let key;
+            if(this.isCapsPressed) {
+                key = 'RU';
+            } else {
+                key = 'ru';
+            }
+            this.elementTextarea.value += buttonConfig[key];
         }
         console.log(this.elementTextarea);
     }
