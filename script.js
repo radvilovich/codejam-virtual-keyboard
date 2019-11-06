@@ -36,7 +36,16 @@ class Button {
                     this.buttonElement.className = 'button';
                 }, 200);
             }
-          });
+        });
+
+        this.buttonElement.addEventListener('click', (event) => {
+            this.buttonElement.className = 'button round';
+            setTimeout(() => {
+                this.buttonElement.className = 'button';
+            }, 200);
+        });
+
+        
     }
 }
 

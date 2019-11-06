@@ -37,8 +37,13 @@ table td {
     line-height: 40px;
     float: left;
     cursor: pointer;
+    transition: background-color 100ms linear;
 }
 
 .button.active, .button:hover {
     background: cornflowerblue;
+}
+
+.button.round {
+    border-radius: 50%;
 }
