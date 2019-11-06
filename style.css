@@ -1,4 +1,4 @@
-textarea {
+.textarea {
     display: block;
     width: 50%;
     height: 300px;
@@ -10,13 +10,15 @@ table td {
     border: 1px solid grey;
 }
 
-#keyboard {
+.keyboard {
     display: block;
     width: 750px;
     height: 250px;
-    border: 1px solid grey;
+    border: 1px solid rgb(154, 156, 156);
     margin: 0 auto;
     padding: 10px;
+    background-color: rgb(154, 156, 156);
+    border-radius: 0.3em;
 }
 
 .row {
@@ -26,9 +28,11 @@ table td {
 .button {
     width: 40px;
     height: 40px;
-    background-color: aquamarine;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    background-color: rgb(44, 54, 51);
+    color: white;
     margin: 5px;
-    border-radius: 15%;
+    border-radius: 0.3em;
     text-align: center;
     line-height: 40px;
     float: left;
