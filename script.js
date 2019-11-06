@@ -26,6 +26,17 @@ class Button {
         this.buttonElement.addEventListener( "click" , () => {
             this.callback(this.buttonConfig);
         });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.code === this.buttonConfig[0])  {
+                console.log(this.buttonElement);
+                this.buttonElement.className = 'button active';
+
+                setTimeout(() => {
+                    this.buttonElement.className = 'button';
+                }, 200);
+            }
+          });
     }
 }
 
@@ -54,6 +65,7 @@ class Keyboard {
             })
         })
         console.log(elementKeyboard);
+
     }
 
     changeInputValue = (buttonConfig) => {
@@ -61,6 +73,8 @@ class Keyboard {
         console.log(this.elementTextarea);
         
     }
+
+    
 }
 
 // generation elements
@@ -68,7 +82,7 @@ class WorkArea {
     constructor(body) {
         const textareaWrapper = document.createElement('div');
         body.append(textareaWrapper);
-        const textarea = document.createElement('div');
+        const textarea = document.createElement('textarea');
         body.append(textarea);
         textarea.className = 'textarea';
 
@@ -84,9 +98,6 @@ class WorkArea {
 } 
 
 const body = document.getElementById("body"); // get DOM-Element #body
-const elementKeyboard = document.getElementById("keyboard"); // get DOM-Element #keyboard
-const elementTextarea = document.getElementById("textarea"); // get DOM-Element #textarea
-//new Keyboard(elementKeyboard, elementTextarea); //create instance of classes Keyboard
 new WorkArea(body); //create instance of class WorkArea
 
 
